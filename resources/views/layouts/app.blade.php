@@ -36,7 +36,7 @@
                             <!-- Left Side Navigation -->
                             @if (Session::has('api_token'))
                                 <a href="{{ route('tasks.index') }}"
-                                    class="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                                    class="text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                                     {{ __('My Tasks') }}
                                 </a>
                                 @if (Session::get('user')['is_admin'])
@@ -52,7 +52,7 @@
                     <!-- Mobile menu button -->
                     <div class="flex items-center sm:hidden">
                         <button @click="open = !open" type="button"
-                            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset"
                             aria-controls="mobile-menu" aria-expanded="false">
                             <span class="sr-only">Open main menu</span>
                             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -69,7 +69,7 @@
                             <div class="ml-3 relative" x-data="{ open: false }">
                                 <div>
                                     <button @click="open = !open" type="button"
-                                        class="bg-white flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                        class="bg-white flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2"
                                         id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                                         <span class="sr-only">Open user menu</span>
                                         <span
@@ -184,7 +184,7 @@
             </div>
         @endif
         <main class="py-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            @if (!request()->routeIs('tasks.index') && !request()->routeIs('users.index'))
+            @if (!request()->routeIs('tasks.index') && !request()->routeIs('users.index') && !request()->routeIs('login') && !request()->routeIs('register'))
                 <div class="mb-4">
                     @php
                         // Determine the parent route based on the current route

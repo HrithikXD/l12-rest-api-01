@@ -176,6 +176,12 @@ class WebTaskController extends Controller
                     ]);
                 }
 
+                $tid = $task['user_id'];
+                $uid = Session::get('user')['id'];
+
+                if($tid != $uid){
+                    return redirect()->route('users.show', $tid)->with('success', 'Task deleted successfully');
+                }
                 return redirect()->route('tasks.index')->with('success', 'Task deleted successfully');
             }
 
