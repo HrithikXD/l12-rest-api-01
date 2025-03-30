@@ -19,9 +19,10 @@ class TaskResource extends JsonResource
             'name'=> $this->name,
             'description'=>$this->description,
             'long_description'=>$this->long_description,
+            'completed' =>$this->completed,
             'created_at'=>$this->created_at,
             'updated_at'=>$this->updated_at,
-            'user' => new UserResource($this->whenLoaded('user'))
+            'user_id' => $this->user_id
         ];
     }
 }

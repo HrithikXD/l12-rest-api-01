@@ -34,7 +34,7 @@ class UserApiController extends Controller
         if (!$token = JWTAuth::attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-
+        
         return response()->json([
             'message' => 'Login Successful',
             'token' => $token,
@@ -57,7 +57,7 @@ class UserApiController extends Controller
             [
                 'name' => 'required|string|max:50',
                 'email' => 'required|email|unique:users,email',
-                'password' => 'required|string'
+                'password' => 'required|string|min:6'
             ]
         );
 
@@ -96,7 +96,7 @@ class UserApiController extends Controller
             $request->validate(
                 [
                     'name' => 'sometimes|string|max:50',
-                    'email' => 'sometimes|string|email|unique:users,email',
+                    'email' => 'sometimes|string|email|unique:users,email,'  . $user->id,
                     'is_admin' => 'sometimes|boolean'
                 ],
             )
@@ -110,9 +110,10 @@ class UserApiController extends Controller
         $user->update(
             $request->validate(
                 [
-                'name' => 'sometimes|string|max:50',
-                'email' => 'sometimes|string|email|unique:users,email,' . $user->id
-            ])
+                    'name' => 'sometimes|string|max:50',
+                    'email' => 'sometimes|string|email|unique:users,email,' . $user->id
+                ]
+            )
         );
 
         return new UserResource($user);

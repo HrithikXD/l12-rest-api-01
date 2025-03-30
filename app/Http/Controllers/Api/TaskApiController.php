@@ -23,13 +23,13 @@ class TaskApiController extends Controller
     public function getUserTask()
     {
         $user = JWTAuth::parseToken()->authenticate();
-        $tasks = Task::where('user_id', $user->id)->latest()->paginate();
+        $tasks = Task::where('user_id', $user->id)->latest()->get();
         return TaskResource::collection($tasks);
     }
 
     public function getTasksOfUser(User $user)
     {
-        $tasks = Task::where('user_id', $user->id)->latest()->paginate();
+        $tasks = Task::where('user_id', $user->id)->latest()->get();
         return TaskResource::collection($tasks);
     }
     /**
@@ -69,7 +69,8 @@ class TaskApiController extends Controller
             [
             'name' => 'sometimes|string|max:50',
             'description' => 'sometimes|string',
-            'long_description' => 'sometimes|string'
+            'long_description' => 'sometimes|string',
+            'completed' => 'sometimes|boolean',
             ],
         ));
         return new TaskResource($task);
